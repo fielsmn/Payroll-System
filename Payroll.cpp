@@ -306,11 +306,8 @@ int main() {
 
             if (loginSuccessful) {
                 break;
-            }
-            else {
-                std::cout << "Username or Password is incorrect. "
-                     << 3 - (1 + loginAttempts)
-                     << " attempts left." << std::endl;
+            } else {
+                std::cout << "Username or Password is incorrect. " << 3 - (1 + loginAttempts) << " attempts left." << std::endl;
             }
         }
 
@@ -500,8 +497,7 @@ int main() {
                     std::cin >> removeUsername;
 
                     if (removeUsername == username) {
-                        std::cout << "You cannot remove your own CEO account."
-                                  << std::endl;
+                        std::cout << "You cannot remove your own CEO account." << std::endl;
                     } else {
 
                         std::ifstream inputFile("employees.txt");
@@ -510,8 +506,7 @@ int main() {
                         if (!inputFile || !tempFile) {
                             std::cout << "ERROR: Could not open employee files."
                                       << std::endl;
-                        }
-                        else {
+                        } else {
                             std::string fileUsername, filePassword;
                             int fileLoginState;
                             double fileSalary, fileHoursWorked;
