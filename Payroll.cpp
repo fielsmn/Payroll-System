@@ -172,34 +172,25 @@ double pagibigDeduction(double salary) {
     return pagibigDeduction;
 }
 
-double trainLawDeduction(double salary) {
-
-    double trainLawDeduction = 0;
-
-    if (salary <= 0) {
+double trainLawDeduction(double monthlyTaxableIncome) {
+    if (monthlyTaxableIncome <= 0) {
         std::cout << "Invalid salary input." << std::endl;
         return 0;
     }
 
-    double annualTaxableIncome = salary * 12;
-    double annualTax = 0;
-
-    if (annualTaxableIncome <= 250000) {
-        annualTax = 0;
-    } else if (annualTaxableIncome <= 400000) {
-        annualTax = (annualTaxableIncome - 250000) * 0.15;
-    } else if (annualTaxableIncome <= 800000) {
-        annualTax = 22500 + (annualTaxableIncome - 400000) * 0.20;
-    } else if (annualTaxableIncome <= 2000000) {
-        annualTax = 102500 + (annualTaxableIncome - 800000) * 0.25;
-    } else if (annualTaxableIncome <= 8000000) {
-        annualTax = 402500 + (annualTaxableIncome - 2000000) * 0.30;
+    if (monthlyTaxableIncome <= 250000.0 / 12) {
+        return 0;
+    } else if (monthlyTaxableIncome <= 400000.0 / 12) {
+        return (monthlyTaxableIncome - 250000.0 / 12) * 0.15;
+    } else if (monthlyTaxableIncome <= 800000.0 / 12) {
+        return 1875 + (monthlyTaxableIncome - 400000.0 / 12) * 0.20;
+    } else if (monthlyTaxableIncome <= 2000000.0 / 12) {
+        return 102500.0 / 12 + (monthlyTaxableIncome - 800000.0 / 12) * 0.25;
+    } else if (monthlyTaxableIncome <= 8000000.0 / 12) {
+        return 402500.0 / 12 + (monthlyTaxableIncome - 2000000.0 / 12) * 0.30;
     } else {
-        annualTax = 2202500 + (annualTaxableIncome - 8000000) * 0.35;
+        return 2202500.0 / 12 + (monthlyTaxableIncome - 8000000.0 / 12) * 0.35;
     }
-
-    trainLawDeduction = annualTax / 12;
-    return trainLawDeduction;
 }
 
 void displayPayroll(std::string username) {
@@ -219,14 +210,19 @@ void displayPayroll(std::string username) {
 
         if (fileUsername == username) {
 
+            const double monthlyHoursBaseline = 160;
+            const double hourlyRate = fileSalary / monthlyHoursBaseline;
+            const double payAdjustment = (fileHoursWorked - monthlyHoursBaseline) * hourlyRate;
+            const double grossPay = fileSalary + payAdjustment;
+
             double sss = sssDeduction(fileSalary);
             double philhealth = philhealthDeduction(fileSalary);
             double pagibig = pagibigDeduction(fileSalary);
-            double trainLaw = trainLawDeduction(fileSalary - sss - philhealth - pagibig);
+            double trainLaw = trainLawDeduction(grossPay - sss - philhealth - pagibig);
 
             double totalDeductions = sss + philhealth + pagibig + trainLaw;
 
-            double netPay = fileSalary - totalDeductions;
+            double netPay = grossPay - totalDeductions;
 
             std::cout << std::endl;
             std::cout << "=============================" << std::endl;
@@ -234,10 +230,19 @@ void displayPayroll(std::string username) {
             std::cout << "=============================" << std::endl;
 
             std::cout << "Employee: " << fileUsername << std::endl;
-            std::cout << "Hours Worked: " << fileHoursWorked << std::endl;
+            std::cout << "Hours Worked: " << fileHoursWorked << " / " << monthlyHoursBaseline << std::endl;
+            std::cout << "Hourly Rate:   " << hourlyRate << std::endl;
 
             std::cout << std::endl;
-            std::cout << "Gross Pay:       " << fileSalary << std::endl;
+            std::cout << "Monthly Salary:  " << fileSalary << std::endl;
+            if (payAdjustment < 0) {
+                std::cout << "Missed-Hours Deduction: -" << -payAdjustment << std::endl;
+            } else if (payAdjustment > 0) {
+                std::cout << "Overtime Pay:    +" << payAdjustment << std::endl;
+            } else {
+                std::cout << "Missed/Overtime: 0" << std::endl;
+            }
+            std::cout << "Adjusted Gross:  " << grossPay << std::endl;
 
             std::cout << std::endl;
             std::cout << "DEDUCTIONS" << std::endl;
@@ -262,7 +267,8 @@ void displayPayroll(std::string username) {
 }
 
 int main() {
-    while (true) {
+    bool programRunning = true;
+    while (programRunning) {
         std::string username, password;
         int loginState = 0;
         bool loginSuccessful = false;
@@ -281,10 +287,20 @@ int main() {
         for (int loginAttempts = 0; loginAttempts < 3; loginAttempts++) {
 
             std::cout << "Enter your username: ";
-            std::cin >> username;
+            if (!(std::cin >> username)) {
+                programRunning = false;
+                break;
+            }
+            if (username == "EXIT") {
+                programRunning = false;
+                break;
+            }
 
             std::cout << "Enter your password: ";
-            std::cin >> password;
+            if (!(std::cin >> password)) {
+                programRunning = false;
+                break;
+            }
 
             employeeFile.clear();
             employeeFile.seekg(0);
