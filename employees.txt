@@ -1,7 +1,7 @@
 ceo ceo123 1 100000 160
 vp vp123 2 300000 160
-exsec exsec123 3 80000 10
-manager manager123 4 65000 10
-supervisor supervisor123 5 60000 10
-rankfile rankfile123 6 55000 10
-payrollmaster payrollmaster123 7 40000 10
+exsec exsec123 3 80000 160
+manager manager123 4 65000 160
+supervisor supervisor123 5 60000 160
+rankfile rankfile123 6 55000 160
+payrollmaster payrollmaster123 7 40000 160

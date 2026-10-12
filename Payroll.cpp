@@ -235,6 +235,7 @@ void displayPayroll(std::string username) {
 
             std::cout << std::endl;
             std::cout << "Monthly Salary:  " << fileSalary << std::endl;
+
             if (payAdjustment < 0) {
                 std::cout << "Missed-Hours Deduction: -" << -payAdjustment << std::endl;
             } else if (payAdjustment > 0) {
@@ -242,6 +243,7 @@ void displayPayroll(std::string username) {
             } else {
                 std::cout << "Missed/Overtime: 0" << std::endl;
             }
+            
             std::cout << "Adjusted Gross:  " << grossPay << std::endl;
 
             std::cout << std::endl;
