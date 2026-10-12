@@ -330,7 +330,8 @@ int main() {
         employeeFile.close();
 
         if (!loginSuccessful) {
-            std::cout << "Too Many Attempts." << std::endl;
+            programRunning = false;
+            std::cout << "Closing Program..." << std::endl;
             continue;
         }
         if (loginState == 1) {

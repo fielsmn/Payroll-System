@@ -1,4 +1,4 @@
-ceo ceo123 1 100000 10
+ceo ceo123 1 100000 160
 vp vp123 2 300000 160
 exsec exsec123 3 80000 10
 manager manager123 4 65000 10
