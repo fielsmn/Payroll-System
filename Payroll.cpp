@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+ 
 double sssDeduction(double salary) {
 
     double sssDeduction = 0;
@@ -355,7 +355,7 @@ int main() {
 
                     std::string newUsername, newPassword;
                     int newLoginState;
-                    double newSalary;
+                    double newSalary, newHoursWorked;
 
                     std::cout << std::endl;
                     std::cout << "CURRENT EMPLOYEES" << std::endl;
@@ -446,6 +446,8 @@ int main() {
                         } else {
                             std::cout << "Enter employee salary: ";
                             std::cin >> newSalary;
+                            std::cout << "Enter employee hours worked: ";
+                            std::cin >> newHoursWorked;
                             std::ofstream addFile("employees.txt", std::ios::app);
 
                             if (!addFile) {
@@ -453,7 +455,8 @@ int main() {
                                 std::cout << "ERROR: Could not open employees.txt"
                                      << std::endl;
                             } else {
-                                addFile << newUsername << " " << newPassword << " " << newLoginState << std::endl;
+                                addFile << newUsername << " " << newPassword << " " << newLoginState << " "
+                                        << newSalary << " " << newHoursWorked << std::endl;
 
                                 addFile.close();
 
