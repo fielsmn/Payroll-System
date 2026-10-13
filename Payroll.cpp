@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 
+// Calculates the employee's SSS contribution based on their monthly salary bracket.
 double sssDeduction(double salary) {
 
     double sssDeduction = 0;
@@ -136,6 +137,7 @@ double sssDeduction(double salary) {
 return sssDeduction;
 }
 
+// Computes the PhilHealth contribution using the monthly salary tier rules.
 double philhealthDeduction(double salary) {
     
     double philhealthDeduction = 0;
@@ -154,6 +156,7 @@ double philhealthDeduction(double salary) {
     return philhealthDeduction;
 }
 
+// Determines the Pag-IBIG contribution based on the employee's monthly salary range.
 double pagibigDeduction(double salary) {
 
     double pagibigDeduction = 0;
@@ -172,6 +175,7 @@ double pagibigDeduction(double salary) {
     return pagibigDeduction;
 }
 
+// Applies the TRAIN Law tax table to calculate the monthly income tax due.
 double trainLawDeduction(double monthlyTaxableIncome) {
     if (monthlyTaxableIncome <= 0) {
         std::cout << "Invalid salary input." << std::endl;
@@ -193,6 +197,7 @@ double trainLawDeduction(double monthlyTaxableIncome) {
     }
 }
 
+// Prints the selected employee's payroll summary, including deductions and net pay.
 void displayPayroll(std::string username) {
 
     std::ifstream payrollFile("employees.txt");
@@ -268,6 +273,7 @@ void displayPayroll(std::string username) {
     std::cout << "Employee payroll could not be found." << std::endl;
 }
 
+// Starts the payroll application and manages login, role-based menus, and employee actions.
 int main() {
     bool programRunning = true;
     while (programRunning) {
@@ -286,6 +292,7 @@ int main() {
         std::cout << "Welcome to the Payroll System" << std::endl;
         std::cout << "=============================" << std::endl;
 
+        // Validates the entered username and password against the employee database.
         for (int loginAttempts = 0; loginAttempts < 3; loginAttempts++) {
 
             std::cout << "Enter your username: ";
@@ -336,6 +343,7 @@ int main() {
             std::cout << "Closing Program..." << std::endl;
             continue;
         }
+        // Displays the CEO dashboard for managing employees and viewing the CEO's payroll.
         if (loginState == 1) {
             int choice;
             do {
@@ -566,6 +574,7 @@ int main() {
             } while (choice != 4);
             continue;
         } else {
+            // Displays the role-specific menu for non-CEO employees, including payroll viewing.
             switch (loginState) {
                 case 2:
                     std::cout << std::endl;
