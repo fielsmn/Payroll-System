@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
- 
+
 double sssDeduction(double salary) {
 
     double sssDeduction = 0;
@@ -347,7 +347,7 @@ int main() {
                 std::cout << "2. Add Employee" << std::endl;
                 std::cout << "3. Remove Employee" << std::endl;
                 std::cout << "4. Logout" << std::endl;
-                std::cout << "Enter your choice: ";
+                std::cout << "Enter your choice (1-4): ";
                 std::cin >> choice;
                 if (choice == 1) {
                     displayPayroll(username);
@@ -614,7 +614,7 @@ int main() {
                     std::cout << "3. View Employees" << std::endl;
                     std::cout << "4. View My Pay" << std::endl;
                     std::cout << "5. Logout" << std::endl;
-                    std::cout << "Enter your choice: ";
+                    std::cout << "Enter your choice (1-5): ";
                     std::cin >> choice;
                     std::cout << std::endl;
 
